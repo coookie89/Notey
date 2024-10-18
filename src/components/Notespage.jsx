@@ -34,18 +34,16 @@ export default function Notespage() {
         </button>
       </Box>
 
-      
+      <Box sx={{ height: 650 }}>
         {view_selection === "txt" ? (
-          <Box sx={{ height: 650, ml: 3, mr: 3 }}>
+          <div sx={{ overflowx: "scroll" }}>
             <ReactMarkdown>{data.groqSummary}</ReactMarkdown>
-          </Box>
+          </div>
         ) : (
           /* Render markdown content */
-          <Box sx={{ height: 650 }}>
-            <Mindmap markdown={data.groqSummary} />
-          </Box>
+          <Mindmap markdown={data.groqSummary} />
         )}
-      
+      </Box>
 
       {/* Add a button to navigate to the quiz page */}
       <Box display="flex" justifyContent="center">

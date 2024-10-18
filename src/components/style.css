@@ -21,17 +21,18 @@ button {
 
 .button-color-1 {
   color: white;
-  background-color: blueviolet;
+  background-color: rgb(43, 25, 102);
 }
 
 .button-color-2 {
-  color: blueviolet;
+  color:  rgb(43, 25, 102);
   background-color: white;
 }
 
 
 button:hover {
-  background-color: orange;
+  color:  rgb(255, 255, 255);
+  background-color: rgb(239, 137, 101);
 }
 
 button:disabled,
