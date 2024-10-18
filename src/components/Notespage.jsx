@@ -1,14 +1,13 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { Box } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import Mindmap from "./Mindmap";
 import { jsonrepair } from "jsonrepair";
 import "./style.css";
 
 export default function Notespage() {
-  const [view_selection, set_view_selection] = React.useState("img"); // either img or txt
+  const [viewSelection, setViewSelection] = React.useState("img"); // 'img' or 'txt'
   const location = useLocation();
   const { data } = location.state || {};
   const navigate = useNavigate();
@@ -18,35 +17,52 @@ export default function Notespage() {
   };
 
   return (
-    <Box>
-      <Box mt={4} display="flex" justifyContent="center">
+    <Box display="flex" flexDirection="column" height="100vh">
+      <Box mt={4} display="flex" justifyContent="center" gap={2}>
         <button
-          className="button-color-3"
-          onClick={() => set_view_selection("img")}
+          className={`button-color-3 ${
+            viewSelection === "img" ? "active" : ""
+          }`}
+          onClick={() => setViewSelection("img")}
         >
           View Image
         </button>
+
         <button
-          className="button-color-3"
-          onClick={() => set_view_selection("txt")}
+          className={`button-color-3 ${
+            viewSelection === "txt" ? "active" : ""
+          }`}
+          onClick={() => setViewSelection("txt")}
         >
           View Text
         </button>
       </Box>
 
-      <Box sx={{ height: 650 }}>
-        {view_selection === "txt" ? (
-          <div sx={{ overflowx: "scroll" }}>
+      {/* Scrollable container for markdown content */}
+      <Box
+        sx={{ 
+          flexGrow: 1, 
+          overflowY: "auto", 
+          padding: 3 
+        }}
+      >
+        {viewSelection === "txt" ? (
+          <div style={{ overflowX: "scroll" }}>
             <ReactMarkdown>{data.groqSummary}</ReactMarkdown>
           </div>
         ) : (
-          /* Render markdown content */
           <Mindmap markdown={data.groqSummary} />
         )}
       </Box>
 
-      {/* Add a button to navigate to the quiz page */}
-      <Box display="flex" justifyContent="center">
+      {/* Sticky button container */}
+      <Box 
+        display="flex" 
+        justifyContent="center" 
+        position="sticky" 
+        bottom={10}
+        bgcolor="background.paper" // Optional: background color for better visibility
+      >
         <button className="button-color-1" onClick={handleClick}>
           Go to Quiz
         </button>
@@ -54,3 +70,4 @@ export default function Notespage() {
     </Box>
   );
 }
+

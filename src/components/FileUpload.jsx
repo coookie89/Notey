@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Typography, Box } from "@mui/material";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "./style.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, Typography, CircularProgress } from '@mui/material';
+import axios from 'axios';
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -15,27 +15,28 @@ const FileUpload = () => {
 
   const handleUpload = async () => {
     if (selectedFile) {
+      setIsLoading(true); // Start loading
       console.log("Selected file:", selectedFile.name);
       const formData = new FormData();
       formData.append("form", selectedFile);
-      // Here, you can add logic to upload the file to a server or handle it as needed.
+      
       try {
         const response = await axios.post(
           "https://6vw41x.buildship.run/add-document-chunks",
           formData,
           {
             headers: {
-              "Content-Type": "multipart/form-data", // Ensure correct content type
+              "Content-Type": "multipart/form-data",
             },
           }
         );
 
         console.log(response);
         navigate("/summary", { state: { data: response.data } });
-        //   navigate('/quiz', {state: {quiz: response.data.groqQues}})
-        //   navigate('/quiz')
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false); // Stop loading regardless of success/failure
       }
     }
   };
@@ -49,8 +50,8 @@ const FileUpload = () => {
       )}
       <Box display="flex" flexDirection="row" alignItems="center" gap={2}>
         <input
-          accept="image/*, application/pdf" // Accept only certain file types
-          style={{ display: "none" }} // Hide the default input
+          accept="image/*, application/pdf"
+          style={{ display: "none" }}
           id="upload-file"
           type="file"
           onChange={handleFileChange}
@@ -72,13 +73,27 @@ const FileUpload = () => {
           </label>
         </button>
 
-        <button
-          className="button-color-1"
-          onClick={handleUpload}
-          disabled={!selectedFile} // Disable upload button if no file is selected
-        >
-          Upload
-        </button>
+        <Box position="relative">
+          <button
+            className="button-color-1"
+            onClick={handleUpload}
+            disabled={!selectedFile || isLoading}
+            style={{ opacity: isLoading ? 0.7 : 1 }}
+          >
+            {isLoading ? 'Uploading...' : 'Upload'}
+          </button>
+          {isLoading && (
+            <CircularProgress
+              size={50}
+              sx={{
+                position: 'absolute',
+                top: '30%',
+                left: 160,
+                marginTop: '-12px',
+              }}
+            />
+          )}
+        </Box>
       </Box>
     </Box>
   );

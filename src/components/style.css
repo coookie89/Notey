@@ -42,3 +42,52 @@ button[disabled]{
   color: #666666;
   cursor: default;
 }
+
+.button-color-3 {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  background-color: cccccc;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-color-3:hover {
+  background-color: rgb(239, 137, 101);
+  color: white;
+}
+
+.button-color-3.active {
+  background-color: rgb(239, 137, 101);
+  color: white;
+}
+
+
+
+@keyframes wordAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  20% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  40% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.word-animation {
+  animation: wordAnimation 1s ease-in-out;
+}
