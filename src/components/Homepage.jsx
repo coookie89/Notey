@@ -35,66 +35,84 @@ export default function Homepage() {
     <Box
       sx={{
         display: "flex",
+        flexDirection: "column",
         minHeight: "100vh",
         width: "100%",
-        px: 4,
       }}
     >
       {/* Left Column */}
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          width: "60%",
+          flexDirection: "row",
+          width: "100%",
           justifyContent: "center",
           alignItems: "left",
           pr: 4,
-        }}
-      >
-        <Typography variant="h3" sx={{ fontWeight: "bold" }}>
-          Find it Hard to <AnimatedWord />
-        </Typography>
-        <Typography variant="h3" sx={{ fontWeight: "bold" }}>
-          Course Slides?
-        </Typography>
-
-        <Typography variant="h5" sx={{ my: 5 }}>
-          Course Slides are Too Big to Read? Upload it! We will generate a mind
-          map for you.
-        </Typography>
-
-        <FileUpload sx={{ my: 5 }} />
-      </Box>
-
-      {/* Right Column */}
-      <Box
-        sx={{
-          display: "flex",
-          width: "50%",
-          justifyContent: "center",
-          alignItems: "center",
-          pl: 4,
+          flexGrow: 5,
         }}
       >
         <Box
-          component="img"
-          src="/Homepage3.png"
-          alt="Study illustration"
           sx={{
-            maxWidth: "130%",
-            maxHeight: "120vh",
-            objectFit: "contain",
-            animation: "float 3s ease-in-out infinite",
-            "@keyframes float": {
-              "0%, 100%": {
-                transform: "translateY(0)",
-              },
-              "50%": {
-                transform: "translateY(-10px)",
-              },
-            },
+            display: "flex",
+            flexDirection: "column",
+            width: "60%",
+            justifyContent: "center",
+            alignItems: "left",
+            pr: 4,
           }}
-        />
+        >
+          <Typography
+            variant="h2"
+            sx={{ fontWeight: "bold", color: "#18216d", my: 2 }}
+          >
+            Notey
+          </Typography>
+          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+            Find it Hard to <AnimatedWord />
+          </Typography>
+          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+            Course Slides?
+          </Typography>
+
+          <Typography variant="h5" sx={{ my: 5 }}>
+            Course Slides are <b>Too Big to Read?</b> <br />
+            <b>Upload it!</b> We generate a mind map for you.
+          </Typography>
+
+          <FileUpload sx={{ my: 5 }} />
+        </Box>
+
+        {/* Right Column */}
+        <Box
+          sx={{
+            display: "flex",
+            width: "50%",
+            justifyContent: "center",
+            alignItems: "center",
+            pl: 4,
+          }}
+        >
+          <Box
+            component="img"
+            src="/Homepage3.png"
+            alt="Study illustration"
+            sx={{
+              maxWidth: "130%",
+              maxHeight: "120vh",
+              objectFit: "contain",
+              animation: "float 3s ease-in-out infinite",
+              "@keyframes float": {
+                "0%, 100%": {
+                  transform: "translateY(0)",
+                },
+                "50%": {
+                  transform: "translateY(-10px)",
+                },
+              },
+            }}
+          />
+        </Box>
       </Box>
     </Box>
   );

@@ -1,10 +1,23 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import Mindmap from "./Mindmap";
 import { jsonrepair } from "jsonrepair";
 import "./style.css";
+
+const customRenderers = {
+  h1: ({ node, ...props }) => (
+    <Typography variant="h4" component="h1" gutterBottom {...props} />
+  ),
+  h2: ({ node, ...props }) => (
+    <Typography variant="h5" component="h2" gutterBottom {...props} />
+  ),
+  h3: ({ node, ...props }) => (
+    <Typography variant="h6" component="h3" gutterBottom {...props} />
+  ),
+
+};
 
 export default function Notespage() {
   const [viewSelection, setViewSelection] = React.useState("img"); // 'img' or 'txt'
@@ -48,7 +61,7 @@ export default function Notespage() {
       >
         {viewSelection === "txt" ? (
           <div style={{ overflowX: "scroll" }}>
-            <ReactMarkdown>{data.groqSummary}</ReactMarkdown>
+            <ReactMarkdown components={customRenderers}>{data.groqSummary}</ReactMarkdown>
           </div>
         ) : (
           <Mindmap markdown={data.groqSummary} />

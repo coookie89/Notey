@@ -1,4 +1,4 @@
-@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.0/dist/tailwind.min.css');
+@import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2.0/dist/tailwind.min.css");
 
 h1,
 p {
@@ -14,7 +14,7 @@ button {
   width: 150px;
   border-radius: 4px;
   transition: 0.5s;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   z-index: 1000;
   margin: 10px 0;
 }
@@ -25,18 +25,17 @@ button {
 }
 
 .button-color-2 {
-  color:  rgb(43, 25, 102);
+  color: rgb(43, 25, 102);
   background-color: white;
 }
 
-
 button:hover {
-  color:  rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   background-color: rgb(239, 137, 101);
 }
 
 button:disabled,
-button[disabled]{
+button[disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
@@ -63,8 +62,6 @@ button[disabled]{
   color: white;
 }
 
-
-
 @keyframes wordAnimation {
   0% {
     opacity: 1;
@@ -90,4 +87,19 @@ button[disabled]{
 
 .word-animation {
   animation: wordAnimation 1s ease-in-out;
+}
+
+ul {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  list-style: disc outside none;
+}
+
+ul li {
+  margin-left: 2em;
+  display: list-item;
+}
+
+ol li {
+  margin-left: 2em;
 }
