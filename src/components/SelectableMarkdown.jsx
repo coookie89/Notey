@@ -9,109 +9,115 @@ import "./style.css";
 
 // Custom wrapper component for ReactMarkdown with selection handling
 const SelectableMarkdown = ({ children, onTextSelect }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedText, setSelectedText] = useState("");
-  const [popupContent, setPopupContent] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
-
-  const handleTextSelection = async (event) => {
-    const selection = window.getSelection();
-    const text = selection.toString().trim();
-
-    if (text.length > 0) {
-      // Get selection coordinates
-      const range = selection.getRangeAt(0);
-      const rect = range.getBoundingClientRect();
-      
-      setSelectedText(text);
-      setAnchorEl(event.currentTarget);
-      setPopupPosition({
-        top: rect.bottom + window.scrollY,
-        left: rect.left + (rect.width / 2) + window.scrollX,
-      });
-
-      // Make API call
-      setIsLoading(true);
-      try {
-        const response = await axios.post('YOUR_API_ENDPOINT', {
-          text: text
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [selectedText, setSelectedText] = useState("");
+    const [popupContent, setPopupContent] = useState(null); // Change to null to start
+    const [isLoading, setIsLoading] = useState(false);
+    const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
+  
+    const handleTextSelection = async (event) => {
+      const selection = window.getSelection();
+      const text = selection.toString().trim();
+  
+      if (text.length > 0) {
+        // Get selection coordinates
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        
+        setSelectedText(text);
+        setAnchorEl(event.currentTarget);
+        setPopupPosition({
+          top: rect.bottom + window.scrollY,
+          left: rect.left + (rect.width / 2) + window.scrollX,
         });
-        setPopupContent(response.data);
-      } catch (error) {
-        setPopupContent("Failed to load explanation");
-        console.error("API call failed:", error);
-      } finally {
-        setIsLoading(false);
+  
+        // Make API call
+        setIsLoading(true);
+        try {
+          const response = await axios.post('https://6vw41x.buildship.run/search', {
+            id: "aGIHfScA6PlOINfa9SlV-0", 
+            selectedText: text,
+            search: false,
+            search_query: ""
+          });
+  
+          // Log the entire response for debugging
+          console.log(response.data);
+  
+          // Set the response content, ensure it's an object
+          setPopupContent(response.data);
+        } catch (error) {
+          console.error("API call failed:", error);
+          setPopupContent({ summary_selected: "Failed to load explanation." }); // Set a fallback message
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        setAnchorEl(null);
       }
-    } else {
+    };
+  
+    const handleClickAway = () => {
       setAnchorEl(null);
-    }
-  };
-
-  const handleClickAway = () => {
-    setAnchorEl(null);
-    setSelectedText("");
-    setPopupContent("");
-  };
-
-  return (
-    <div 
-      onMouseUp={handleTextSelection}
-      onClick={(e) => e.target === e.currentTarget && handleClickAway()}
-    >
-      {children}
-      
-      <Popper 
-        open={Boolean(anchorEl)} 
-        anchorEl={anchorEl}
-        placement="bottom"
-        style={{
-          position: 'absolute',
-          top: popupPosition.top,
-          left: popupPosition.left,
-          transform: 'translateX(-50%)',
-          zIndex: 1300
-        }}
+      setSelectedText("");
+      setPopupContent(null);
+    };
+  
+    return (
+      <div 
+        onMouseUp={handleTextSelection}
+        onClick={(e) => e.target === e.currentTarget && handleClickAway()}
       >
-        <Paper 
-          sx={{ 
-            p: 2, 
-            maxWidth: 300,
-            maxHeight: 200,
-            overflow: 'auto',
-            boxShadow: 3,
-            bgcolor: 'background.paper',
-            borderRadius: 1,
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: -10,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              borderWidth: '0 10px 10px 10px',
-              borderStyle: 'solid',
-              borderColor: 'transparent transparent background.paper transparent',
-            }
+        {children}
+        
+        <Popper 
+          open={Boolean(anchorEl)} 
+          anchorEl={anchorEl}
+          placement="bottom"
+          style={{
+            position: 'absolute',
+            top: popupPosition.top,
+            left: popupPosition.left,
+            transform: 'translateX(-50%)',
+            zIndex: 1300
           }}
         >
-          {isLoading ? (
-            <Box display="flex" justifyContent="center" p={1}>
-              <CircularProgress size={20} />
-            </Box>
-          ) : (
-            <div>
-              <div style={{ fontWeight: 'bold', marginBottom: 8 }}>
-                Selected: "{selectedText}"
+          <Paper 
+            sx={{ 
+              p: 2, 
+              maxWidth: 600,
+              overflowY: 'auto',
+              boxShadow: 3,
+              bgcolor: 'background.paper',
+              borderRadius: 1,
+              whiteSpace: 'normal',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: -10,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                borderWidth: '0 10px 10px 10px',
+                borderStyle: 'solid',
+                borderColor: 'transparent transparent background.paper transparent',
+              }
+            }}
+          >
+            {isLoading ? (
+              <Box display="flex" justifyContent="center" p={1}>
+                <CircularProgress size={30} />
+              </Box>
+            ) : (
+              <div>
+                {popupContent ? popupContent.summary_selected : "No explanation available."}
               </div>
-              <div>{popupContent}</div>
-            </div>
-          )}
-        </Paper>
-      </Popper>
-    </div>
-  );
-};
+            )}
+          </Paper>
+        </Popper>
+      </div>
+    );
+  };
+  
 
 export default function Notespage() {
   const [viewSelection, setViewSelection] = React.useState("img");
