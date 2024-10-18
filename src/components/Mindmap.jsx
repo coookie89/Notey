@@ -18,15 +18,6 @@ function renderToolbar(mm, wrapper) {
   while (wrapper?.firstChild) wrapper.firstChild.remove();
   if (mm && wrapper) {
     const toolbar = new Toolbar();
-    toolbar.attach(mm);
-    // Register custom buttons
-    toolbar.register({
-      id: 'alert',
-      title: 'Click to show an alert',
-      content: 'Alert',
-      onClick: () => alert('You made it!'),
-    });
-    toolbar.setItems([...Toolbar.defaultItems, 'alert']);
     wrapper.append(toolbar.render());
   }
 }
