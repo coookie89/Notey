@@ -15,15 +15,8 @@ export default function Notespage() {
   }
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh"
-      bgcolor="#f5f5f5"
-      p={2}
-    >
-      <Paper elevation={3} sx={{ padding: 4, maxWidth: 800, width: '100%' }}>
+    
+      <Box >
         {/* Render markdown content */}
         <Box sx={{height: 700}}>
           <Mindmap markdown={data.groqSummary} />
@@ -36,7 +29,6 @@ export default function Notespage() {
             Go to Quiz
           </Button>
         </Box>
-      </Paper>
-    </Box>
+      </Box>
   )
 }

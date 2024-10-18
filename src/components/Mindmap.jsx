@@ -18,6 +18,9 @@ function renderToolbar(mm, wrapper) {
   while (wrapper?.firstChild) wrapper.firstChild.remove();
   if (mm && wrapper) {
     const toolbar = new Toolbar();
+    toolbar.attach(mm);
+    // Register custom buttons
+    
     wrapper.append(toolbar.render());
   }
 }
