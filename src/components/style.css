@@ -9,3 +9,24 @@ p {
   display: inline;
 }
 
+button {
+  height: 50px;
+  width: 150px;
+  border-radius: 4px;
+  transition: 0.5s;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.19);
+}
+
+.button-color-1 {
+  color: white;
+  background-color: blueviolet;
+}
+
+.button-color-2 {
+  color: blueviolet;
+  background-color: white;
+}
+
+button:hover {
+  background-color: orange;
+}

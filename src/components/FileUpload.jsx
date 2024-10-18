@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Box } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import "./style.css";
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
@@ -48,19 +48,18 @@ const FileUpload = () => {
             onChange={handleFileChange}
         />
         <label htmlFor="upload-file">
-            <Button variant="contained" color="primary" component="span">
+            <button component="span" class="button-color-2">
             Choose File
-            </Button>
+            </button>
         </label>
         
-        <Button
-            variant="contained"
-            color="secondary"
+        <button
+            class="button-color-1"
             onClick={handleUpload}
             disabled={!selectedFile} // Disable upload button if no file is selected
         >
             Upload
-        </Button>
+        </button>
         </Box>
     </Box>
   );
