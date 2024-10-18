@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Homepage from './components/Homepage';
+import Quizpage from './components/Quizpage'
+import Notespage from './components/Notespage';
 
 function App() {
+  const theme = createTheme({
+    typography: {
+      fontFamily: 'Quicksand, sans-serif',  // Use the Quicksand font
+      fontSize: 14,  // Default font size for body text (in pixels)
+  
+      body1: {
+        fontSize: '1rem',  // Font size for body1 (paragraph text)
+      },
+      button: {
+        fontSize: '1rem',  // Font size for buttons
+        fontWeight: 'bold',
+      },
+    },
+  });
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}> 
+        <Router>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/summary" element={<Notespage />} />
+            <Route path="/quiz" element={<Quizpage />} />
+          </Routes>
+
+        </Router>
+    </ThemeProvider>
   );
 }
 
