@@ -1,34 +1,58 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import { Paper, Button, Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import Mindmap from './Mindmap';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Mindmap from "./Mindmap";
+import { jsonrepair } from "jsonrepair";
+import "./style.css";
 
 export default function Notespage() {
+  const [view_selection, set_view_selection] = React.useState("img"); // either img or txt
   const location = useLocation();
   const { data } = location.state || {};
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/quiz', {state: {quiz: data.groqQuestions}})
-  }
+    navigate("/quiz", { state: { quiz: jsonrepair(data.groqQuestions) } });
+  };
 
   return (
-    
-      <Box >
-        {/* Render markdown content */}
-        <Box sx={{height: 700}}>
-          <Mindmap markdown={data.groqSummary} />
-        </Box>
-        <ReactMarkdown>{data.groqSummary}</ReactMarkdown>
-
-        {/* Add a button to navigate to the quiz page */}
-        <Box mt={4} display="flex" justifyContent="center">
-          <Button variant="contained" color="primary" onClick={handleClick}>
-            Go to Quiz
-          </Button>
-        </Box>
+    <Box>
+      <Box mt={4} display="flex" justifyContent="center">
+        <button
+          className="button-color-3"
+          onClick={() => set_view_selection("img")}
+        >
+          View Image
+        </button>
+        <button
+          className="button-color-3"
+          onClick={() => set_view_selection("txt")}
+        >
+          View Text
+        </button>
       </Box>
-  )
+
+      
+        {view_selection === "txt" ? (
+          <Box sx={{ height: 650, ml: 3, mr: 3 }}>
+            <ReactMarkdown>{data.groqSummary}</ReactMarkdown>
+          </Box>
+        ) : (
+          /* Render markdown content */
+          <Box sx={{ height: 650 }}>
+            <Mindmap markdown={data.groqSummary} />
+          </Box>
+        )}
+      
+
+      {/* Add a button to navigate to the quiz page */}
+      <Box display="flex" justifyContent="center">
+        <button className="button-color-1" onClick={handleClick}>
+          Go to Quiz
+        </button>
+      </Box>
+    </Box>
+  );
 }
