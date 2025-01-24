@@ -1,6 +1,25 @@
-@import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2.0/dist/tailwind.min.css");
+h1 {
+  font-weight: 1000;
+  color: #18216d;
+  font-size: 3.75rem;
+}
 
-h1,
+h2 {
+  font-weight: 800;
+  color: #000000;
+  font-size: 3rem;
+}
+
+h3 {
+  font-weight: 400;
+  color: #000000;
+  font-size: 2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Quicksand, sans-serif;
+}
+
 p {
   font-family: Lato;
 }
@@ -87,6 +106,19 @@ button[disabled] {
 
 .word-animation {
   animation: wordAnimation 1s ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+img.float-animation {
+  animation: float 3s ease-in-out infinite;
 }
 
 ul {
