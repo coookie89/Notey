@@ -31,9 +31,9 @@ const AnimatedWord = () => {
 
 export default function Homepage() {
   return (
-    <div className="container main">
-      <div className="row align-items-center">
-        <div className="col">
+    <div className="main">
+      <div className="d-flex gap-5 align-items-center flex-md-row flex-column">
+        <div className="w-100">
           <h1 className="mb-4">Notey</h1>
           <h2 className="mb-4">
             Find it Hard to <AnimatedWord /> Course Slides?
@@ -44,9 +44,9 @@ export default function Homepage() {
             &nbsp;<b>Upload it!</b> We generate a mind map for you.
           </h5>
 
-          <FileUpload sx={{ my: 5 }} />
+          <FileUpload/>
         </div>
-        <div className="col">
+        <div className="w-100">
           <img
             src="Homepage3.png"
             className="img-fluid float-animation"
