@@ -31,7 +31,7 @@ const AnimatedWord = () => {
 
 export default function Homepage() {
   return (
-    <div className="main">
+    <div className="main d-flex align-items-md-center align-items-start">
       <div className="d-flex gap-5 align-items-center flex-md-row flex-column">
         <div className="w-100">
           <h1 className="mb-4">Notey</h1>

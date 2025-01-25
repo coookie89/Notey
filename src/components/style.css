@@ -37,9 +37,10 @@ p {
 }
 
 .main {
-  padding: 0 15%;
+  padding: 10% 15%;
   vertical-align: center;
   height: 100%;
+  overflow: scroll;
 }
 
 .row {
