@@ -23,15 +23,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}> 
         <Router>
-        <div class="fix-border">
           <Routes>
-            
               <Route path="/" element={<Homepage />} />
               <Route path="/summary" element={<Notespage />} />
               <Route path="/quiz" element={<Quizpage />} />
-            
           </Routes>
-          </div>
         </Router>
     </ThemeProvider>
   );

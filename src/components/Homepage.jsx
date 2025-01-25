@@ -39,10 +39,10 @@ export default function Homepage() {
             Find it Hard to <AnimatedWord /> Course Slides?
           </h2>
 
-          <h3>
+          <h5 className="mb-4">
             Course Slides are <b>Too Big to Read?</b>
             &nbsp;<b>Upload it!</b> We generate a mind map for you.
-          </h3>
+          </h5>
 
           <FileUpload sx={{ my: 5 }} />
         </div>
