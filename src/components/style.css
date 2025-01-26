@@ -115,31 +115,71 @@ button[disabled],
   color: white;
 }
 
-@keyframes wordAnimation {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  20% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  40% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.word-animation {
+  display: inline-block;
+  position: relative;
+  width: 180px;
+  height: 60px;
+  overflow: hidden;
+  transform: translateY(14px);
 }
 
-.word-animation {
-  animation: wordAnimation 1s ease-in-out;
+span {
+  margin: 0;
+  padding: 0;
+}
+
+.word-animation span {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  vertical-align: baseline;
+  animation: slide 15s infinite; /* 5 words × 3s = 15s */
+  opacity: 0;
+  color: rgb(239, 137, 101);
+}
+
+/* Define the timing for each word to appear */
+.word-animation span:nth-child(1) {
+  width: auto;
+  animation-delay: 0s;
+}
+.word-animation span:nth-child(2) {
+  width: auto;
+  animation-delay: 3s;
+}
+.word-animation span:nth-child(3) {
+  animation-delay: 6s;
+}
+.word-animation span:nth-child(4) {
+  animation-delay: 9s;
+}
+.word-animation span:nth-child(5) {
+  animation-delay: 12s;
+}
+
+/* Keyframes for sliding and fading effect */
+@keyframes slide {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }
 
 @keyframes float {
