@@ -112,7 +112,7 @@ export default function Notespage() {
           id="home"
           role="tabpanel"
           aria-labelledby="home-tab"
-          className="tab-pane fade show active"
+          className="tab-pane fade show active h-100"
         >
           {/*----- Mindmap -----*/}
           <Mindmap markdown={data.groqSummary} />
