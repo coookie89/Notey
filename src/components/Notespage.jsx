@@ -18,7 +18,7 @@ const customRenderers = {
 };
 
 export default function Notespage() {
-  const [viewSelection, setViewSelection] = React.useState("img"); // 'img' or 'txt'
+  const [viewSelection, setViewSelection] = React.useState("img"); // 'img', 'txt' or 'file'
   const location = useLocation();
   const { data } = location.state || {};
   const navigate = useNavigate();
@@ -28,43 +28,73 @@ export default function Notespage() {
   };
 
   return (
-    <div className="sub-screen d-flex align-items-center flex-column justify-content-between gap-4">
-      <div class="d-flex gap-3 w-50 justify-content-between">
-        <div className="w-100">
+    <div className="sub-screen d-flex align-items-center flex-column justify-content-between">
+
+      {/*---------- Headline ----------*/}
+      <div class="d-flex w-100 justify-content-between">
+        {/*----- Tab bar -----*/}
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          {/* 1st tab */}
+          <li class="nav-item" role="presentation">
+            <button
+              className={`nav-link btn btn-primary btn-lg ${
+                viewSelection === "img" ? "active" : ""
+              }`}
+              id="home-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#home"
+              type="button"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+              onClick={() => setViewSelection("img")}
+            >
+              Mindmap
+            </button>
+          </li>
+          {/* 2nd tab */}
+          <li class="nav-item" role="presentation">
+            <button
+              className={`nav-link btn btn-primary btn-lg ${
+                viewSelection === "txt" ? "active" : ""
+              }`}
+              id="profile-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+              onClick={() => setViewSelection("txt")}
+            >
+              Notes
+            </button>
+          </li>
+          {/* 3rd tab */}
+          <li class="nav-item" role="presentation">
+            <button
+              className={`nav-link btn btn-primary btn-lg ${
+                viewSelection === "txt" ? "active" : ""
+              }`}
+              id="contact-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#contact"
+              type="button"
+              role="tab"
+              aria-controls="contact"
+              aria-selected="false"
+              onClick={() => setViewSelection("file")}
+            >
+              Original file
+            </button>
+          </li>
+        </ul>
+
+        {/*----- Main page btn -----*/}
+        <div>
           <button
             type="button"
-            className={`btn btn-primary btn-lg ${
-              viewSelection === "img" ? "active" : ""
-            }`}
-            onClick={() => setViewSelection("img")}
-          >
-            Mindmap
-          </button>
-        </div>
-        <div className="w-100">
-          <button
-            className={`btn btn-primary btn-lg ${
-              viewSelection === "txt" ? "active" : ""
-            }`}
-            onClick={() => setViewSelection("txt")}
-          >
-            Note
-          </button>
-        </div>
-        <div className="w-100">
-          <button
-            type="button"
-            className={`btn btn-primary btn-lg ${
-              viewSelection === "img" ? "active" : ""
-            }`}
-            onClick={() => setViewSelection("img")}
-          >
-            Uploaded file
-          </button>
-        </div>
-        <div className="w-100">
-          <button
-            className="btn btn-secondary btn-lg"
+            className="btn btn-secondary btn-md"
             onClick={() => handleClick()}
           >
             Upload new slides!
@@ -72,20 +102,42 @@ export default function Notespage() {
         </div>
       </div>
 
-      {/* Scrollable container for markdown content */}
+      {/*---------- Content ----------*/}
       <div
+        class="tab-content w-100 h-100"
+        id="myTabContent"
         style={{ backgroundColor: "grey", overflowX: "scroll" }}
-        className="w-100 flex-fill"
       >
-        {viewSelection === "txt" ? (
-          <div>
-            <ReactMarkdown components={customRenderers}>
-              {data.groqSummary}
-            </ReactMarkdown>
-          </div>
-        ) : (
+        <div
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+          className="tab-pane fade show active"
+        >
+          {/*----- Mindmap -----*/}
           <Mindmap markdown={data.groqSummary} />
-        )}
+        </div>
+
+        <div
+          class="tab-pane fade"
+          id="profile"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+        >
+          {/*----- Markdown text -----*/}
+          <ReactMarkdown components={customRenderers}>
+            {data.groqSummary}
+          </ReactMarkdown>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="contact"
+          role="tabpanel"
+          aria-labelledby="contact-tab"
+        >
+          {/*----- Uploaded original file preview -----*/}
+          ...
+        </div>
       </div>
     </div>
   );

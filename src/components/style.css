@@ -187,18 +187,3 @@ button[disabled],
 img.float-animation {
   animation: float 3s ease-in-out infinite;
 }
-
-ul {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  list-style: disc outside none;
-}
-
-ul li {
-  margin-left: 2em;
-  display: list-item;
-}
-
-ol li {
-  margin-left: 2em;
-}
