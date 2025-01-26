@@ -55,7 +55,7 @@ p {
   min-width: 200px;
 }
 
-button {
+button, label {
   min-width: 100%;
   min-height: 45px;
   height:100%;
@@ -63,6 +63,13 @@ button {
   transition: 0.5s;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   z-index: 1000;
+}
+
+label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .button-color-1, .btn-secondary {
@@ -77,11 +84,11 @@ button {
   background-color: white;
 }
 
-button {
+button, label {
   font-size: 90% !important;
 }
 
-button:hover, .btn-primary:hover, .btn-secondary:hover {
+button:hover, label:hover, .btn-primary:hover, .btn-secondary:hover {
   color: rgb(255, 255, 255);
   background-color: rgb(239, 137, 101);
 }

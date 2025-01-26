@@ -52,42 +52,40 @@ const FileUpload = () => {
       </div>
       <div>
         <div class="d-flex gap-3 justify-content-md-start justify-content-between">
-            <div className="w-100">
-              <input
-                accept="image/*, application/pdf"
-                style={{ display: "none" }}
-                id="upload-file"
-                type="file"
-                onChange={handleFileChange}
-              />
-              <button type="button" class="btn btn-primary btn-lg">
-                <label htmlFor="upload-file" style={{ cursor: "pointer" }}>
-                  Choose File
-                </label>
-              </button>
-            </div>
-            <div className="w-100">
-              <button
-                type="button"
-                class="btn btn-secondary btn-lg"
-                onClick={handleUpload}
-                disabled={!selectedFile || isLoading}
-                style={{ opacity: isLoading ? 0.7 : 1 }}
-              >
-                {isLoading ? "Uploading..." : "Upload"}
-              </button>
+          <div className="w-100">
+            <input
+              accept="image/*, application/pdf"
+              id="upload-file"
+              type="file"
+              onChange={handleFileChange}
+              hidden
+            />
+            <label class="btn-primary btn-lg" htmlFor="upload-file">
+              <div>Choose File</div>
+            </label>
+          </div>
+          <div className="w-100">
+            <button
+              type="button"
+              class="btn btn-secondary btn-lg"
+              onClick={handleUpload}
+              disabled={!selectedFile || isLoading}
+              style={{ opacity: isLoading ? 0.7 : 1 }}
+            >
+              {isLoading ? "Uploading..." : "Upload"}
+            </button>
 
-              {isLoading && (
-                <CircularProgress
-                  size={50}
-                  sx={{
-                    position: "absolute",
-                    top: "30%",
-                    left: 160,
-                    marginTop: "-12px",
-                  }}
-                />
-              )}
+            {isLoading && (
+              <CircularProgress
+                size={50}
+                sx={{
+                  position: "absolute",
+                  top: "30%",
+                  left: 160,
+                  marginTop: "-12px",
+                }}
+              />
+            )}
           </div>
         </div>
       </div>
