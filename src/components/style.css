@@ -36,11 +36,18 @@ p {
   font-family: Lato;
 }
 
-.main {
+.main-screen {
   padding: 10% 15%;
   vertical-align: center;
   height: 100%;
   overflow: scroll;
+}
+
+.sub-screen {
+  padding: 2% 5%;
+  vertical-align: center;
+  height: 100%;
+  width: 100%;
 }
 
 .row {
@@ -100,16 +107,6 @@ button[disabled],
   background-color: #cccccc;
   color: #666666;
   cursor: default;
-}
-
-.button-color-3 {
-  padding: 10px 20px;
-  margin: 5px;
-  border: none;
-  background-color: #cccccc;
-  color: black;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .button-color-3:hover {

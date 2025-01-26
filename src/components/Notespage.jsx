@@ -1,9 +1,8 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { Typography, Box } from "@mui/material";
+import { Typography } from "@mui/material";
 import Mindmap from "./Mindmap";
-import { jsonrepair } from "jsonrepair";
 import "./style.css";
 
 const customRenderers = {
@@ -16,7 +15,6 @@ const customRenderers = {
   h3: ({ node, ...props }) => (
     <Typography variant="h6" component="h3" gutterBottom {...props} />
   ),
-
 };
 
 export default function Notespage() {
@@ -26,61 +24,69 @@ export default function Notespage() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/quiz", { state: { quiz: jsonrepair(data.groqQuestions) } });
+    navigate("/");
   };
 
   return (
-    <Box display="flex" flexDirection="column" height="100vh">
-      <Box mt={4} display="flex" justifyContent="center" gap={2}>
-        <button
-          className={`button-color-3 ${
-            viewSelection === "img" ? "active" : ""
-          }`}
-          onClick={() => setViewSelection("img")}
-        >
-          View Image
-        </button>
-
-        <button
-          className={`button-color-3 ${
-            viewSelection === "txt" ? "active" : ""
-          }`}
-          onClick={() => setViewSelection("txt")}
-        >
-          View Text
-        </button>
-      </Box>
+    <div className="sub-screen d-flex align-items-center flex-column justify-content-between gap-4">
+      <div class="d-flex gap-3 w-50 justify-content-between">
+        <div className="w-100">
+          <button
+            type="button"
+            className={`btn btn-primary btn-lg ${
+              viewSelection === "img" ? "active" : ""
+            }`}
+            onClick={() => setViewSelection("img")}
+          >
+            Mindmap
+          </button>
+        </div>
+        <div className="w-100">
+          <button
+            className={`btn btn-primary btn-lg ${
+              viewSelection === "txt" ? "active" : ""
+            }`}
+            onClick={() => setViewSelection("txt")}
+          >
+            Note
+          </button>
+        </div>
+        <div className="w-100">
+          <button
+            type="button"
+            className={`btn btn-primary btn-lg ${
+              viewSelection === "img" ? "active" : ""
+            }`}
+            onClick={() => setViewSelection("img")}
+          >
+            Uploaded file
+          </button>
+        </div>
+        <div className="w-100">
+          <button
+            className="btn btn-secondary btn-lg"
+            onClick={() => handleClick()}
+          >
+            Upload new slides!
+          </button>
+        </div>
+      </div>
 
       {/* Scrollable container for markdown content */}
-      <Box
-        sx={{ 
-          flexGrow: 1, 
-          overflowY: "auto", 
-          padding: 3 
-        }}
+      <div
+        style={{ backgroundColor: "grey", overflowX: "scroll" }}
+        className="w-100 flex-fill"
       >
         {viewSelection === "txt" ? (
-          <div style={{ overflowX: "scroll" }}>
-            <ReactMarkdown components={customRenderers}>{data.groqSummary}</ReactMarkdown>
+          <div>
+            <ReactMarkdown components={customRenderers}>
+              {data.groqSummary}
+            </ReactMarkdown>
           </div>
         ) : (
           <Mindmap markdown={data.groqSummary} />
         )}
-      </Box>
-
-      {/* Sticky button container */}
-      <Box 
-        display="flex" 
-        justifyContent="center" 
-        position="sticky" 
-        bottom={10}
-        bgcolor="background.paper" // Optional: background color for better visibility
-      >
-        <button className="button-color-1" onClick={handleClick}>
-          Go to Quiz
-        </button>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
-

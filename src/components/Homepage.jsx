@@ -2,7 +2,7 @@ import FileUpload from "./FileUpload";
 
 export default function Homepage() {
   return (
-    <div className="main d-flex align-items-md-center align-items-start">
+    <div className="main-screen d-flex align-items-md-center align-items-start">
       <div className="d-flex gap-5 align-items-center flex-md-row flex-column">
 
         {/* left part */}
