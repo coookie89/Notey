@@ -116,22 +116,13 @@ button[disabled],
 }
 
 .word-animation {
-  display: inline-block;
   position: relative;
-  width: 180px;
   height: 60px;
-  overflow: hidden;
-  transform: translateY(14px);
-}
-
-span {
-  margin: 0;
-  padding: 0;
 }
 
 .word-animation span {
   position: absolute;
-  width: 100%;
+  width: auto;
   text-align: center;
   vertical-align: baseline;
   animation: slide 15s infinite; /* 5 words × 3s = 15s */
@@ -141,11 +132,9 @@ span {
 
 /* Define the timing for each word to appear */
 .word-animation span:nth-child(1) {
-  width: auto;
   animation-delay: 0s;
 }
 .word-animation span:nth-child(2) {
-  width: auto;
   animation-delay: 3s;
 }
 .word-animation span:nth-child(3) {
