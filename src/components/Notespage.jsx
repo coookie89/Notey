@@ -32,14 +32,14 @@ export default function Notespage() {
 
       {/*---------- Headline ----------*/}
       <div class="d-flex w-100 justify-content-between">
+
         {/*----- Tab bar -----*/}
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           {/* 1st tab */}
-          <li class="nav-item" role="presentation">
-            <button
-              className={`nav-link btn btn-primary btn-lg ${
+          <li class={`nav-item nav-link ${
                 viewSelection === "img" ? "active" : ""
-              }`}
+              }`} role="presentation">
+            <button
               id="home-tab"
               data-bs-toggle="tab"
               data-bs-target="#home"
@@ -53,11 +53,10 @@ export default function Notespage() {
             </button>
           </li>
           {/* 2nd tab */}
-          <li class="nav-item" role="presentation">
-            <button
-              className={`nav-link btn btn-primary btn-lg ${
+          <li class={`nav-item nav-link ${
                 viewSelection === "txt" ? "active" : ""
-              }`}
+              }`} role="presentation">
+            <button
               id="profile-tab"
               data-bs-toggle="tab"
               data-bs-target="#profile"
@@ -71,11 +70,10 @@ export default function Notespage() {
             </button>
           </li>
           {/* 3rd tab */}
-          <li class="nav-item" role="presentation">
+          <li class={`nav-item nav-link ${
+                viewSelection === "file" ? "active" : ""
+              }`} role="presentation">
             <button
-              className={`nav-link btn btn-primary btn-lg ${
-                viewSelection === "txt" ? "active" : ""
-              }`}
               id="contact-tab"
               data-bs-toggle="tab"
               data-bs-target="#contact"
@@ -106,7 +104,6 @@ export default function Notespage() {
       <div
         class="tab-content w-100 h-100"
         id="myTabContent"
-        style={{ backgroundColor: "grey", overflowX: "scroll" }}
       >
         <div
           id="home"

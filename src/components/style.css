@@ -62,7 +62,7 @@ p {
   min-width: 200px;
 }
 
-button, label {
+.btn-secondary, .btn-primary, label {
   min-width: 100%;
   min-height: 45px;
   height:100%;
@@ -79,13 +79,13 @@ label {
   cursor: pointer;
 }
 
-.button-color-1, .btn-secondary {
+.btn-secondary {
   border: 1px solid rgb(43, 25, 102);
   color: white;
   background-color: rgb(43, 25, 102);
 }
 
-.button-color-2, .btn-primary {
+.btn-primary {
   border: none;
   color: rgb(43, 25, 102);
   background-color: white;
@@ -95,19 +95,25 @@ button, label {
   font-size: 90% !important;
 }
 
-button:hover, label:hover, .btn-primary:hover, .btn-secondary:hover {
+label:hover, .btn-primary:hover, .btn-secondary:hover {
   color: rgb(255, 255, 255);
   background-color: rgb(239, 137, 101);
 }
 
-button:disabled,
-button[disabled],
 .btn-secondary:disabled {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
   cursor: default;
 }
+
+.tab-content {
+  border: 2px solid grey;
+  border-radius: 3px;
+  overflow-x: scroll;
+  padding: 2%;
+}
+
 
 .button-color-3:hover {
   background-color: rgb(239, 137, 101);
@@ -117,6 +123,19 @@ button[disabled],
 .button-color-3.active {
   background-color: rgb(239, 137, 101);
   color: white;
+}
+
+.nav-link {
+  padding: 0;
+}
+
+.nav-item button {
+  border: 0;
+  background-color: rgb(0, 0, 0, 0);
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  padding: .5rem 1rem;
 }
 
 .word-animation {
