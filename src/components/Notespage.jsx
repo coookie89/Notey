@@ -1,25 +1,12 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import { Typography } from "@mui/material";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 import Mindmap from "./Mindmap";
 import "./style.css";
 
-import PsychologyIcon from '@mui/icons-material/Psychology';
-import ArticleIcon from '@mui/icons-material/Article';
-import FindInPageIcon from '@mui/icons-material/FindInPage';
-
-const customRenderers = {
-  h1: ({ node, ...props }) => (
-    <Typography variant="h4" component="h1" gutterBottom {...props} />
-  ),
-  h2: ({ node, ...props }) => (
-    <Typography variant="h5" component="h2" gutterBottom {...props} />
-  ),
-  h3: ({ node, ...props }) => (
-    <Typography variant="h6" component="h3" gutterBottom {...props} />
-  ),
-};
+import PsychologyIcon from "@mui/icons-material/Psychology";
+import ArticleIcon from "@mui/icons-material/Article";
+import FindInPageIcon from "@mui/icons-material/FindInPage";
 
 export default function Notespage() {
   const [viewSelection, setViewSelection] = React.useState("img"); // 'img', 'txt' or 'file'
@@ -33,16 +20,17 @@ export default function Notespage() {
 
   return (
     <div className="sub-screen d-flex align-items-center flex-column justify-content-between">
-
       {/*---------- Headline ----------*/}
       <div class="d-flex w-100 justify-content-between">
-
         {/*----- Tab bar -----*/}
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           {/* 1st tab */}
-          <li class={`nav-item nav-link ${
-                viewSelection === "img" ? "active" : ""
-              }`} role="presentation">
+          <li
+            class={`nav-item nav-link ${
+              viewSelection === "img" ? "active" : ""
+            }`}
+            role="presentation"
+          >
             <button
               id="home-tab"
               data-bs-toggle="tab"
@@ -53,13 +41,17 @@ export default function Notespage() {
               aria-selected="true"
               onClick={() => setViewSelection("img")}
             >
-              <PsychologyIcon/>&nbsp;Mindmap
+              <PsychologyIcon />
+              &nbsp;Mindmap
             </button>
           </li>
           {/* 2nd tab */}
-          <li class={`nav-item nav-link ${
-                viewSelection === "txt" ? "active" : ""
-              }`} role="presentation">
+          <li
+            class={`nav-item nav-link ${
+              viewSelection === "txt" ? "active" : ""
+            }`}
+            role="presentation"
+          >
             <button
               id="profile-tab"
               data-bs-toggle="tab"
@@ -70,13 +62,17 @@ export default function Notespage() {
               aria-selected="false"
               onClick={() => setViewSelection("txt")}
             >
-              <ArticleIcon />&nbsp;Notes
+              <ArticleIcon />
+              &nbsp;Notes
             </button>
           </li>
           {/* 3rd tab */}
-          <li class={`nav-item nav-link ${
-                viewSelection === "file" ? "active" : ""
-              }`} role="presentation">
+          <li
+            class={`nav-item nav-link ${
+              viewSelection === "file" ? "active" : ""
+            }`}
+            role="presentation"
+          >
             <button
               id="contact-tab"
               data-bs-toggle="tab"
@@ -87,7 +83,8 @@ export default function Notespage() {
               aria-selected="false"
               onClick={() => setViewSelection("file")}
             >
-              <FindInPageIcon />&nbsp;Original file
+              <FindInPageIcon />
+              &nbsp;Original file
             </button>
           </li>
         </ul>
@@ -105,10 +102,7 @@ export default function Notespage() {
       </div>
 
       {/*---------- Content ----------*/}
-      <div
-        class="tab-content w-100 h-100"
-        id="myTabContent"
-      >
+      <div class="tab-content w-100 h-100" id="myTabContent">
         <div
           id="home"
           role="tabpanel"
@@ -126,9 +120,18 @@ export default function Notespage() {
           aria-labelledby="profile-tab"
         >
           {/*----- Markdown text -----*/}
-          <ReactMarkdown components={customRenderers}>
-            {data.groqSummary}
-          </ReactMarkdown>
+          <MarkdownPreview
+            source={data.groqSummary}
+            rehypeRewrite={(node, index, parent) => {
+              if (
+                node.tagName === "a" &&
+                parent &&
+                /^h(1|2|3|4|5|6)/.test(parent.tagName)
+              ) {
+                parent.children = parent.children.slice(1);
+              }
+            }}
+          />
         </div>
         <div
           class="tab-pane fade"

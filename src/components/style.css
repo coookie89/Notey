@@ -114,8 +114,8 @@ label:hover, .btn-primary:hover, .btn-secondary:hover {
   overflow-x: scroll;
   padding: 2%;
   background-color: rgb(255, 255, 255);
-  border-radius: 5px;
-  border-top-left-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .button-color-3:hover {
