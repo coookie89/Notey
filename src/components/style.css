@@ -48,6 +48,7 @@ p {
   vertical-align: center;
   height: 100%;
   width: 100%;
+  background-color: rgb(244, 227, 200);
 }
 
 .row {
@@ -108,12 +109,14 @@ label:hover, .btn-primary:hover, .btn-secondary:hover {
 }
 
 .tab-content {
-  border: 2px solid grey;
-  border-radius: 3px;
+  border: 1px solid #dee2e6;
+  border-top: 0px;
   overflow-x: scroll;
   padding: 2%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  border-top-left-radius: 0;
 }
-
 
 .button-color-3:hover {
   background-color: rgb(239, 137, 101);

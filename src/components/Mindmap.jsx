@@ -1,44 +1,31 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Markmap } from 'markmap-view';
-import { Toolbar } from 'markmap-toolbar';
-import 'markmap-toolbar/dist/style.css';
+import React, { useRef, useEffect } from "react";
+import { Markmap } from "markmap-view";
+import { Toolbar } from "markmap-toolbar";
+import "markmap-toolbar/dist/style.css";
 
-import { loadCSS, loadJS } from 'markmap-common';
-import { Transformer } from 'markmap-lib';
-import * as markmap from 'markmap-view';
-
+import { Transformer } from "markmap-lib";
 export const transformer = new Transformer();
-const { scripts, styles } = transformer.getAssets();
-
-// Load CSS and JS assets dynamically
-loadCSS(styles);
-loadJS(scripts, { getMarkmap: () => markmap });
 
 function renderToolbar(mm, wrapper) {
   while (wrapper?.firstChild) wrapper.firstChild.remove();
   if (mm && wrapper) {
     const toolbar = new Toolbar();
     toolbar.attach(mm);
-    // Register custom buttons
-    
-    wrapper.append(toolbar.render());
+    wrapper.append(toolbar.render()); // Register custom buttons
   }
 }
 
 export default function MarkmapHooks(props) {
-  const [value, setValue] = useState(props.markdown);
-  // Ref for SVG element
-  const refSvg = useRef(null);
-  // Ref for markmap object
-  const refMm = useRef(null);
-  // Ref for toolbar wrapper
-  const refToolbar = useRef(null);
+  const value = props.markdown;
+  const refSvg = useRef(null); // Ref for SVG element
+  const refMm = useRef(null); // Ref for markmap object
+  const refToolbar = useRef(null); // Ref for toolbar wrapper
 
   useEffect(() => {
     // Create markmap and save to refMm
     if (refMm.current) return;
     const mm = Markmap.create(refSvg.current);
-    console.log('create', refSvg.current);
+    console.log("create", refSvg.current);
     refMm.current = mm;
     renderToolbar(refMm.current, refToolbar.current);
   }, [refSvg]);
@@ -53,9 +40,9 @@ export default function MarkmapHooks(props) {
   }, [value]);
 
   return (
-    <React.Fragment>
-      <svg className="flex-1" width="100%" height="100%" ref={refSvg} />
-      <div className="absolute bottom-1 right-1" ref={refToolbar}></div>
-    </React.Fragment>
+    <div className="w-100 h-100 d-flex flex-column justify-content-between">
+      <svg className="h-100 w-100 flex-grow-1" ref={refSvg} />
+      <div ref={refToolbar}></div>
+    </div>
   );
 }
