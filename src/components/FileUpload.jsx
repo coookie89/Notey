@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
 import axios from "axios";
 
 const FileUpload = () => {
@@ -72,20 +71,19 @@ const FileUpload = () => {
               disabled={!selectedFile || isLoading}
               style={{ opacity: isLoading ? 0.7 : 1 }}
             >
-              {isLoading ? "Uploading..." : "Upload"}
+              {isLoading ? (
+                <>
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    aria-hidden="true"
+                  ></span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <span role="status">Loading...</span>
+                </>
+              ) : (
+                "Upload"
+              )}
             </button>
-
-            {isLoading && (
-              <CircularProgress
-                size={50}
-                sx={{
-                  position: "absolute",
-                  top: "30%",
-                  left: 160,
-                  marginTop: "-12px",
-                }}
-              />
-            )}
           </div>
         </div>
       </div>
