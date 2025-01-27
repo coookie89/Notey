@@ -1,7 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
-import Quizpage from './components/Quizpage'
 import Notespage from './components/Notespage';
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
           <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/summary" element={<Notespage />} />
-              <Route path="/quiz" element={<Quizpage />} />
           </Routes>
         </Router>
     </ThemeProvider>
