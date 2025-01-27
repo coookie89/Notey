@@ -7,7 +7,7 @@ import "./style.css";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import ArticleIcon from "@mui/icons-material/Article";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
-import HomeIcon from "@mui/icons-material/Home";
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function Notespage() {
   const [viewSelection, setViewSelection] = React.useState("img"); // 'img', 'txt' or 'file'
@@ -95,10 +95,10 @@ export default function Notespage() {
           <button
             type="button"
             className="btn btn-secondary btn-md"
-            style={{borderRadius: "50%"}}
+            style={{borderRadius: "50%", cursor: "pointer"}}
             onClick={() => handleClick()}
           >
-            <HomeIcon/>
+            <HomeIcon />
           </button>
         </div>
       </div>
@@ -122,7 +122,18 @@ export default function Notespage() {
           aria-labelledby="profile-tab"
         >
           {/*----- Markdown text -----*/}
-          <MarkdownPreview source={data.groqSummary} />
+          <MarkdownPreview
+            source={data.groqSummary}
+            rehypeRewrite={(node, index, parent) => {
+              if (
+                node.tagName === "a" &&
+                parent &&
+                /^h(1|2|3|4|5|6)/.test(parent.tagName)
+              ) {
+                parent.children = parent.children.slice(1);
+              }
+            }}
+          />
         </div>
         <div
           class="tab-pane fade"
