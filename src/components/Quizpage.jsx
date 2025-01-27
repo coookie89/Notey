@@ -10,8 +10,6 @@ import {
   Paper,
 } from "@mui/material";
 
-import "./tailwind.css";
-
 export default function Quizpage() {
   const navigate = useNavigate();
   const location = useLocation();

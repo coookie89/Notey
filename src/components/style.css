@@ -135,7 +135,17 @@ label:hover, .btn-primary:hover, .btn-secondary:hover {
   color: inherit;
   width: 100%;
   height: 100%;
-  padding: .5rem 1rem;
+  padding: 0 1.3rem;
+  font-weight: 600;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
+  color: rgb(0, 0, 0);
 }
 
 .word-animation {
