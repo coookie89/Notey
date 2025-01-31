@@ -43,6 +43,7 @@ const FileUpload = () => {
   return (
     <div>
       <div className="mb-2">
+        {/* display selected file name if any */}
         {selectedFile ? (
           <>File selected: {selectedFile.name}</>
         ) : (
@@ -51,6 +52,7 @@ const FileUpload = () => {
       </div>
       <div>
         <div class="d-flex gap-3 justify-content-md-start justify-content-between">
+          {/* btn1: choose file */}
           <div className="w-100">
             <input
               accept="image/*, application/pdf"
@@ -63,6 +65,7 @@ const FileUpload = () => {
               <div>Choose File</div>
             </label>
           </div>
+          {/* btn2: upload file */}
           <div className="w-100">
             <button
               type="button"
