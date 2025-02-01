@@ -22,12 +22,12 @@ export default function Notespage() {
   return (
     <div className="sub-screen d-flex align-items-center flex-column justify-content-between">
       {/*---------- Headline ----------*/}
-      <div class="d-flex w-100 justify-content-between">
+      <div className="d-flex w-100 justify-content-between">
         {/*----- Tab bar -----*/}
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul className="nav nav-tabs" id="myTab" role="tablist">
           {/* 1st tab */}
           <li
-            class={`nav-item nav-link ${
+            className={`nav-item nav-link ${
               viewSelection === "img" ? "active" : ""
             }`}
             role="presentation"
@@ -48,7 +48,7 @@ export default function Notespage() {
           </li>
           {/* 2nd tab */}
           <li
-            class={`nav-item nav-link ${
+            className={`nav-item nav-link ${
               viewSelection === "txt" ? "active" : ""
             }`}
             role="presentation"
@@ -69,7 +69,7 @@ export default function Notespage() {
           </li>
           {/* 3rd tab */}
           <li
-            class={`nav-item nav-link ${
+            className={`nav-item nav-link ${
               viewSelection === "file" ? "active" : ""
             }`}
             role="presentation"
@@ -104,7 +104,7 @@ export default function Notespage() {
       </div>
 
       {/*---------- Content ----------*/}
-      <div class="tab-content w-100 h-100" id="myTabContent">
+      <div className="tab-content w-100 h-100" id="myTabContent">
         <div
           id="home"
           role="tabpanel"
@@ -112,18 +112,18 @@ export default function Notespage() {
           className="tab-pane fade show active h-100"
         >
           {/*----- Mindmap -----*/}
-          <Mindmap markdown={data.groqSummary} />
+          <Mindmap markdown={data} />
         </div>
 
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="profile"
           role="tabpanel"
           aria-labelledby="profile-tab"
         >
           {/*----- Markdown text -----*/}
           <MarkdownPreview
-            source={data.groqSummary}
+            source={data}
             rehypeRewrite={(node, index, parent) => {
               if (
                 node.tagName === "a" &&
@@ -136,7 +136,7 @@ export default function Notespage() {
           />
         </div>
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="contact"
           role="tabpanel"
           aria-labelledby="contact-tab"

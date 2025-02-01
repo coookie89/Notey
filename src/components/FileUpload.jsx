@@ -17,11 +17,11 @@ const FileUpload = () => {
       setIsLoading(true); // Start loading
       console.log("Selected file:", selectedFile.name);
       const formData = new FormData();
-      formData.append("form", selectedFile);
+      formData.append("file", selectedFile);
 
       try {
         const response = await axios.post(
-          "https://6vw41x.buildship.run/add-document-chunks",
+          "http://127.0.0.1:8000/upload",
           formData,
           {
             headers: {
@@ -30,13 +30,32 @@ const FileUpload = () => {
           }
         );
 
-        console.log(response);
-        navigate("/summary", { state: { data: response.data } });
+        const file_id = response.data.file_id;
+        console.log(response.data.file_id);
+        return file_id;
       } catch (error) {
         console.log(error);
-      } finally {
-        setIsLoading(false); // Stop loading regardless of success/failure
+        return null;
       }
+    }
+  };
+
+  const processNotes = async () => {
+    const file_id = await handleUpload();
+
+    if (!file_id) {
+      console.log("File upload failed. Cannot proceed with processing.");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/process/${file_id}`, { responseType: "text" });
+      console.log("Processing response:", response.data);
+      navigate("/summary", { state: { data: response.data } });
+    } catch (error) {
+      console.log("Processing error:", error);
+    } finally {
+      setIsLoading(false); // Stop loading regardless of success/failure
     }
   };
 
@@ -51,7 +70,7 @@ const FileUpload = () => {
         )}
       </div>
       <div>
-        <div class="d-flex gap-3 justify-content-md-start justify-content-between">
+        <div className="d-flex gap-3 justify-content-md-start justify-content-between">
           {/* btn1: choose file */}
           <div className="w-100">
             <input
@@ -61,7 +80,7 @@ const FileUpload = () => {
               onChange={handleFileChange}
               hidden
             />
-            <label class="btn-primary btn-lg" htmlFor="upload-file">
+            <label className="btn-primary btn-lg" htmlFor="upload-file">
               <div>Choose File</div>
             </label>
           </div>
@@ -69,15 +88,15 @@ const FileUpload = () => {
           <div className="w-100">
             <button
               type="button"
-              class="btn btn-secondary btn-lg"
-              onClick={handleUpload}
+              className="btn btn-secondary btn-lg"
+              onClick={processNotes}
               disabled={!selectedFile || isLoading}
               style={{ opacity: isLoading ? 0.7 : 1 }}
             >
               {isLoading ? (
                 <>
                   <span
-                    class="spinner-border spinner-border-sm"
+                    className="spinner-border spinner-border-sm"
                     aria-hidden="true"
                   ></span>
                   &nbsp;&nbsp;&nbsp;&nbsp;

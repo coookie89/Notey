@@ -10,7 +10,7 @@ export default function Homepage() {
           <h1 className="mb-4">Notey</h1>
           <h2 className="mb-4">
             Find it Hard to
-            <div class="word-animation">
+            <div className="word-animation">
               <span>Revise</span>
               <span>Study</span>
               <span>Review</span>

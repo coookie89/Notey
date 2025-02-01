@@ -17,6 +17,8 @@ function renderToolbar(mm, wrapper) {
 
 export default function MarkmapHooks(props) {
   const value = props.markdown;
+  console.log(value);
+
   const refSvg = useRef(null); // Ref for SVG element
   const refMm = useRef(null); // Ref for markmap object
   const refToolbar = useRef(null); // Ref for toolbar wrapper
