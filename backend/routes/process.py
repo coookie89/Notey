@@ -5,7 +5,7 @@ from services.ocr import extract_text
 from services.llm import generate_markdown_notes
 
 router = APIRouter()
-UPLOAD_DIR = Path("uploads")
+UPLOAD_DIR = Path("static/uploads")
 
 @router.get("/process/{file_id}")
 async def get_markdown(file_id: str):
