@@ -12,7 +12,9 @@ import HomeIcon from '@mui/icons-material/Home';
 export default function Notespage() {
   const [viewSelection, setViewSelection] = React.useState("img"); // 'img', 'txt' or 'file'
   const location = useLocation();
-  const { data } = location.state || {};
+  const { markdown, fileUrl } = location.state || {};
+  console.log(fileUrl)
+  
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -112,7 +114,7 @@ export default function Notespage() {
           className="tab-pane fade show active h-100"
         >
           {/*----- Mindmap -----*/}
-          <Mindmap markdown={data} />
+          <Mindmap markdown={markdown} />
         </div>
 
         <div
@@ -123,7 +125,7 @@ export default function Notespage() {
         >
           {/*----- Markdown text -----*/}
           <MarkdownPreview
-            source={data}
+            source={markdown}
             rehypeRewrite={(node, index, parent) => {
               if (
                 node.tagName === "a" &&
@@ -136,13 +138,15 @@ export default function Notespage() {
           />
         </div>
         <div
-          className="tab-pane fade"
+          className="tab-pane fade w-100 h-100"
           id="contact"
           role="tabpanel"
           aria-labelledby="contact-tab"
         >
+          <div class="embed-responsive embed-responsive-16by9 w-100 h-100">
           {/*----- Uploaded original file preview -----*/}
-          ...
+          <iframe class="embed-responsive-item w-100 h-100" src={fileUrl} allowfullscreen title="aww"/>
+          </div>
         </div>
       </div>
     </div>

@@ -9,13 +9,12 @@ const FileUpload = () => {
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
-    console.log(event.target.files[0]);
+    // console.log(event.target.files[0]);
   };
 
   const handleUpload = async () => {
     if (selectedFile) {
       setIsLoading(true); // Start loading
-      console.log("Selected file:", selectedFile.name);
       const formData = new FormData();
       formData.append("file", selectedFile);
 
@@ -31,8 +30,8 @@ const FileUpload = () => {
         );
 
         const file_id = response.data.file_id;
-        console.log(response.data.file_id);
-        return file_id;
+        const file_url = response.data.url;
+        return [file_id, file_url];
       } catch (error) {
         console.log(error);
         return null;
@@ -41,7 +40,8 @@ const FileUpload = () => {
   };
 
   const processNotes = async () => {
-    const file_id = await handleUpload();
+    const [file_id, file_url] = await handleUpload();
+    console.log(file_url);
 
     if (!file_id) {
       console.log("File upload failed. Cannot proceed with processing.");
@@ -50,8 +50,7 @@ const FileUpload = () => {
 
     try {
       const response = await axios.get(`http://127.0.0.1:8000/process/${file_id}`, { responseType: "text" });
-      console.log("Processing response:", response.data);
-      navigate("/summary", { state: { data: response.data } });
+      navigate("/summary", { state: { markdown: response.data, fileUrl: file_url }});
     } catch (error) {
       console.log("Processing error:", error);
     } finally {
