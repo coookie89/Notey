@@ -106,3 +106,4 @@ venv.bak/
 # testing files
 /uploads
 /static
+/test

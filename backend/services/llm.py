@@ -14,7 +14,7 @@ def generate_markdown_notes(text: str):
         model="llama3-8b-8192",
         messages=
             [
-                {"role": "system", "content": "Summarize and format as Markdown notes."},
+                {"role": "system", "content": "Clean up the text for logical consistency, ensuring complete sentences and proper structure. Then, generate well-organized notes in Markdown format to help memorize."},
                 {"role": "user", "content": text}
             ]
     )

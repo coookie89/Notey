@@ -11,7 +11,6 @@ def extract_text(file_path: str):
         with pdfplumber.open(file_path) as pdf:
             for i, page in enumerate(pdf.pages):
                 page_text = page.extract_text() or ""  # Extract text if available
-                text += f"Page {i + 1} / {len(pdf.pages)}\n"
                 if page_text:
                     text += page_text + "\n"
                 
