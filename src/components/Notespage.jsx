@@ -119,6 +119,7 @@ export default function Notespage() {
 
         <div
           className="tab-pane fade"
+          style={{padding: "0 27%"}}
           id="profile"
           role="tabpanel"
           aria-labelledby="profile-tab"

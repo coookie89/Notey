@@ -5,6 +5,7 @@ import axios from "axios";
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -34,6 +35,7 @@ const FileUpload = () => {
         return [file_id, file_url];
       } catch (error) {
         console.log(error);
+        setError(`Uploading error: ${error}`);
         return null;
       }
     }
@@ -53,6 +55,8 @@ const FileUpload = () => {
       navigate("/summary", { state: { markdown: response.data, fileUrl: file_url }});
     } catch (error) {
       console.log("Processing error:", error);
+      setError(`Processing error: ${error}`);
+      return null;
     } finally {
       setIsLoading(false); // Stop loading regardless of success/failure
     }
@@ -67,7 +71,9 @@ const FileUpload = () => {
         ) : (
           <div style={{ visibility: "hidden" }}>space</div>
         )}
+      <div style={{color: "red"}}>{error}</div>
       </div>
+
       <div>
         <div className="d-flex gap-3 justify-content-md-start justify-content-between">
           {/* btn1: choose file */}
